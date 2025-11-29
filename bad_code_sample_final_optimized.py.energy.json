@@ -1,0 +1,497 @@
+{
+  "file": "bad_code_sample_final_optimized.py",
+  "lines": [
+    {
+      "line": 1,
+      "energy": "medium"
+    },
+    {
+      "line": 2,
+      "energy": "medium"
+    },
+    {
+      "line": 3,
+      "energy": "medium"
+    },
+    {
+      "line": 4,
+      "energy": "low"
+    },
+    {
+      "line": 5,
+      "energy": "low"
+    },
+    {
+      "line": 6,
+      "energy": "low"
+    },
+    {
+      "line": 7,
+      "energy": "low"
+    },
+    {
+      "line": 8,
+      "energy": "low"
+    },
+    {
+      "line": 9,
+      "energy": "low"
+    },
+    {
+      "line": 10,
+      "energy": "medium"
+    },
+    {
+      "line": 11,
+      "energy": "medium"
+    },
+    {
+      "line": 12,
+      "energy": "medium"
+    },
+    {
+      "line": 13,
+      "energy": "medium"
+    },
+    {
+      "line": 14,
+      "energy": "low"
+    },
+    {
+      "line": 15,
+      "energy": "medium"
+    },
+    {
+      "line": 16,
+      "energy": "medium"
+    },
+    {
+      "line": 17,
+      "energy": "medium"
+    },
+    {
+      "line": 18,
+      "energy": "low"
+    },
+    {
+      "line": 19,
+      "energy": "high"
+    },
+    {
+      "line": 20,
+      "energy": "medium"
+    },
+    {
+      "line": 21,
+      "energy": "medium"
+    },
+    {
+      "line": 22,
+      "energy": "medium"
+    },
+    {
+      "line": 23,
+      "energy": "low"
+    },
+    {
+      "line": 24,
+      "energy": "medium"
+    },
+    {
+      "line": 25,
+      "energy": "low"
+    },
+    {
+      "line": 26,
+      "energy": "low"
+    },
+    {
+      "line": 27,
+      "energy": "medium"
+    },
+    {
+      "line": 28,
+      "energy": "medium"
+    },
+    {
+      "line": 29,
+      "energy": "medium"
+    },
+    {
+      "line": 30,
+      "energy": "low"
+    },
+    {
+      "line": 31,
+      "energy": "medium"
+    },
+    {
+      "line": 32,
+      "energy": "medium"
+    },
+    {
+      "line": 33,
+      "energy": "low"
+    },
+    {
+      "line": 34,
+      "energy": "medium"
+    },
+    {
+      "line": 35,
+      "energy": "medium"
+    },
+    {
+      "line": 36,
+      "energy": "low"
+    },
+    {
+      "line": 37,
+      "energy": "medium"
+    },
+    {
+      "line": 38,
+      "energy": "low"
+    },
+    {
+      "line": 39,
+      "energy": "low"
+    },
+    {
+      "line": 40,
+      "energy": "medium"
+    },
+    {
+      "line": 41,
+      "energy": "medium"
+    },
+    {
+      "line": 42,
+      "energy": "medium"
+    },
+    {
+      "line": 43,
+      "energy": "low"
+    },
+    {
+      "line": 44,
+      "energy": "medium"
+    },
+    {
+      "line": 45,
+      "energy": "medium"
+    },
+    {
+      "line": 46,
+      "energy": "low"
+    },
+    {
+      "line": 47,
+      "energy": "medium"
+    },
+    {
+      "line": 48,
+      "energy": "medium"
+    },
+    {
+      "line": 49,
+      "energy": "low"
+    },
+    {
+      "line": 50,
+      "energy": "medium"
+    },
+    {
+      "line": 51,
+      "energy": "low"
+    },
+    {
+      "line": 52,
+      "energy": "high"
+    },
+    {
+      "line": 53,
+      "energy": "low"
+    },
+    {
+      "line": 54,
+      "energy": "low"
+    },
+    {
+      "line": 55,
+      "energy": "medium"
+    },
+    {
+      "line": 56,
+      "energy": "medium"
+    },
+    {
+      "line": 57,
+      "energy": "medium"
+    },
+    {
+      "line": 58,
+      "energy": "low"
+    },
+    {
+      "line": 59,
+      "energy": "medium"
+    },
+    {
+      "line": 60,
+      "energy": "medium"
+    },
+    {
+      "line": 61,
+      "energy": "low"
+    },
+    {
+      "line": 62,
+      "energy": "high"
+    },
+    {
+      "line": 63,
+      "energy": "medium"
+    },
+    {
+      "line": 64,
+      "energy": "low"
+    },
+    {
+      "line": 65,
+      "energy": "medium"
+    },
+    {
+      "line": 66,
+      "energy": "low"
+    },
+    {
+      "line": 67,
+      "energy": "low"
+    },
+    {
+      "line": 68,
+      "energy": "medium"
+    },
+    {
+      "line": 69,
+      "energy": "medium"
+    },
+    {
+      "line": 70,
+      "energy": "medium"
+    },
+    {
+      "line": 71,
+      "energy": "low"
+    },
+    {
+      "line": 72,
+      "energy": "medium"
+    },
+    {
+      "line": 73,
+      "energy": "medium"
+    },
+    {
+      "line": 74,
+      "energy": "low"
+    },
+    {
+      "line": 75,
+      "energy": "medium"
+    },
+    {
+      "line": 76,
+      "energy": "medium"
+    },
+    {
+      "line": 77,
+      "energy": "medium"
+    },
+    {
+      "line": 78,
+      "energy": "medium"
+    },
+    {
+      "line": 79,
+      "energy": "low"
+    },
+    {
+      "line": 80,
+      "energy": "low"
+    },
+    {
+      "line": 81,
+      "energy": "medium"
+    },
+    {
+      "line": 82,
+      "energy": "high"
+    },
+    {
+      "line": 83,
+      "energy": "high"
+    },
+    {
+      "line": 84,
+      "energy": "high"
+    },
+    {
+      "line": 85,
+      "energy": "low"
+    },
+    {
+      "line": 86,
+      "energy": "medium"
+    },
+    {
+      "line": 87,
+      "energy": "low"
+    },
+    {
+      "line": 88,
+      "energy": "low"
+    },
+    {
+      "line": 89,
+      "energy": "low"
+    },
+    {
+      "line": 90,
+      "energy": "low"
+    },
+    {
+      "line": 91,
+      "energy": "low"
+    },
+    {
+      "line": 92,
+      "energy": "low"
+    },
+    {
+      "line": 93,
+      "energy": "low"
+    },
+    {
+      "line": 94,
+      "energy": "low"
+    },
+    {
+      "line": 95,
+      "energy": "low"
+    },
+    {
+      "line": 96,
+      "energy": "low"
+    },
+    {
+      "line": 97,
+      "energy": "low"
+    },
+    {
+      "line": 98,
+      "energy": "low"
+    },
+    {
+      "line": 99,
+      "energy": "low"
+    },
+    {
+      "line": 100,
+      "energy": "low"
+    },
+    {
+      "line": 101,
+      "energy": "low"
+    },
+    {
+      "line": 102,
+      "energy": "low"
+    },
+    {
+      "line": 103,
+      "energy": "low"
+    },
+    {
+      "line": 104,
+      "energy": "low"
+    },
+    {
+      "line": 105,
+      "energy": "low"
+    },
+    {
+      "line": 106,
+      "energy": "low"
+    },
+    {
+      "line": 107,
+      "energy": "low"
+    },
+    {
+      "line": 108,
+      "energy": "low"
+    },
+    {
+      "line": 109,
+      "energy": "low"
+    },
+    {
+      "line": 110,
+      "energy": "low"
+    },
+    {
+      "line": 111,
+      "energy": "low"
+    },
+    {
+      "line": 112,
+      "energy": "low"
+    },
+    {
+      "line": 113,
+      "energy": "low"
+    },
+    {
+      "line": 114,
+      "energy": "low"
+    },
+    {
+      "line": 115,
+      "energy": "low"
+    },
+    {
+      "line": 116,
+      "energy": "low"
+    },
+    {
+      "line": 117,
+      "energy": "low"
+    },
+    {
+      "line": 118,
+      "energy": "low"
+    },
+    {
+      "line": 119,
+      "energy": "low"
+    },
+    {
+      "line": 120,
+      "energy": "low"
+    },
+    {
+      "line": 121,
+      "energy": "low"
+    },
+    {
+      "line": 122,
+      "energy": "low"
+    },
+    {
+      "line": 123,
+      "energy": "low"
+    }
+  ]
+}

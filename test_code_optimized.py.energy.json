@@ -1,0 +1,97 @@
+{
+  "file": "test_code_optimized.py",
+  "lines": [
+    {
+      "line": 1,
+      "energy": "low"
+    },
+    {
+      "line": 2,
+      "energy": "medium"
+    },
+    {
+      "line": 3,
+      "energy": "high"
+    },
+    {
+      "line": 4,
+      "energy": "high"
+    },
+    {
+      "line": 5,
+      "energy": "low"
+    },
+    {
+      "line": 6,
+      "energy": "low"
+    },
+    {
+      "line": 7,
+      "energy": "medium"
+    },
+    {
+      "line": 8,
+      "energy": "medium"
+    },
+    {
+      "line": 9,
+      "energy": "medium"
+    },
+    {
+      "line": 10,
+      "energy": "medium"
+    },
+    {
+      "line": 11,
+      "energy": "low"
+    },
+    {
+      "line": 12,
+      "energy": "high"
+    },
+    {
+      "line": 13,
+      "energy": "medium"
+    },
+    {
+      "line": 14,
+      "energy": "medium"
+    },
+    {
+      "line": 15,
+      "energy": "medium"
+    },
+    {
+      "line": 16,
+      "energy": "medium"
+    },
+    {
+      "line": 17,
+      "energy": "low"
+    },
+    {
+      "line": 18,
+      "energy": "medium"
+    },
+    {
+      "line": 19,
+      "energy": "low"
+    },
+    {
+      "line": 20,
+      "energy": "low"
+    },
+    {
+      "line": 21,
+      "energy": "medium"
+    },
+    {
+      "line": 22,
+      "energy": "medium"
+    },
+    {
+      "line": 23,
+      "energy": "high"
+    }
+  ]
+}
