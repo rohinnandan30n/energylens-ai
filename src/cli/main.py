@@ -49,13 +49,13 @@ def score_label(score: float) -> str:
 def big_o_badge(big_o: str) -> str:
     """Create a Big-O complexity badge with color"""
     badges = {
-        "O(1)": "[green]O(1) 🟢 TRIVIAL[/green]",
+        "O(1)": "[green]O(1) [GREEN] TRIVIAL[/green]",
         "O(log n)": "[cyan]O(log n) 🔵 FAST[/cyan]",
-        "O(n)": "[yellow]O(n) 🟡 LINEAR[/yellow]",
+        "O(n)": "[yellow]O(n) [YEL] LINEAR[/yellow]",
         "O(n log n)": "[orange1]O(n log n) 🟠 MODERATE[/orange1]",
-        "O(n²)": "[red]O(n²) 🔴 HARD[/red]",
-        "O(n³)": "[red]O(n³) 🔴 VERY HARD[/red]",
-        "O(2^n)": "[dark_red]O(2^n) ⚫ EXPONENTIAL[/dark_red]",
+        "O(n²)": "[red]O(n²) [RED] HARD[/red]",
+        "O(n³)": "[red]O(n³) [RED] VERY HARD[/red]",
+        "O(2^n)": "[dark_red]O(2^n) [BLK] EXPONENTIAL[/dark_red]",
     }
     return badges.get(big_o, f"[dim]{big_o}[/dim]")
 
@@ -64,17 +64,17 @@ def combined_badge(big_o: str, complexity_score: float) -> str:
     """Create a combined badge: Big-O + difficulty + score label"""
     label = score_label(complexity_score)
     if "O(1)" in big_o:
-        return f"[green]O(1) 🟢 TRIVIAL | Score: {label}[/green]"
+        return f"[green]O(1) [GREEN] TRIVIAL | Score: {label}[/green]"
     elif "O(log n)" in big_o:
         return f"[cyan]O(log n) 🔵 FAST | Score: {label}[/cyan]"
     elif "O(n)" in big_o and "O(n²)" not in big_o:
-        return f"[yellow]O(n) 🟡 LINEAR | Score: {label}[/yellow]"
+        return f"[yellow]O(n) [YEL] LINEAR | Score: {label}[/yellow]"
     elif "O(n log n)" in big_o:
         return f"[orange1]O(n log n) 🟠 MODERATE | Score: {label}[/orange1]"
     elif "O(n²)" in big_o or "O(n³)" in big_o:
-        return f"[red]{big_o} 🔴 HARD | Score: {label}[/red]"
+        return f"[red]{big_o} [RED] HARD | Score: {label}[/red]"
     elif "O(2^n)" in big_o:
-        return f"[dark_red]{big_o} ⚫ EXPONENTIAL | Score: {label}[/dark_red]"
+        return f"[dark_red]{big_o} [BLK] EXPONENTIAL | Score: {label}[/dark_red]"
     else:
         return f"[dim]{big_o} | Score: {label}[/dim]"
 
@@ -133,10 +133,10 @@ def analyze(file, detailed):
         file_size_kb = round(file_path.stat().st_size / 1024, 2)
         total_lines, blank_lines, comment_lines = get_code_stats(code)
     except Exception as e:
-        console.print(f"[red]❌ Error reading file: {e}[/red]")
+        console.print(f"[red][NO] Error reading file: {e}[/red]")
         return
     
-    console.print(f"\n[bold cyan]⚡ Analyzing:[/bold cyan] {file}\n")
+    console.print(f"\n[bold cyan][POWER] Analyzing:[/bold cyan] {file}\n")
     
     # Show progress
     for _ in track(range(3), description="Processing code..."):
@@ -145,10 +145,10 @@ def analyze(file, detailed):
     # Step 1: Analyze complexity
     analyzer = ComplexityAnalyzer()
     try:
-        console.print("[green]✔ Complexity analysis completed[/green]")
+        console.print("[green][OK] Complexity analysis completed[/green]")
         analysis = analyzer.analyze(code)
     except ValueError as e:
-        console.print(f"[red]❌ Error analyzing code: {e}[/red]")
+        console.print(f"[red][NO] Error analyzing code: {e}[/red]")
         return
     
     # Step 2: Load ML model and predict
@@ -157,14 +157,14 @@ def analyze(file, detailed):
     confidence = None
     try:
         predictor.load('models/energy_model.pkl')
-        console.print("[green]✔ ML model loaded successfully[/green]")
+        console.print("[green][OK] ML model loaded successfully[/green]")
         energy, confidence = predictor.predict(analysis['features'])
-        console.print("[green]✔ Prediction generated[/green]")
+        console.print("[green][OK] Prediction generated[/green]")
     except FileNotFoundError:
-        console.print("[yellow]⚠️  ML model not found.[/yellow]")
+        console.print("[yellow][WARN]  ML model not found.[/yellow]")
         console.print("[yellow]Run training first: energylens train[/yellow]\n")
     except Exception as e:
-        console.print(f"[yellow]⚠️  Model load/predict error: {e}[/yellow]")
+        console.print(f"[yellow][WARN]  Model load/predict error: {e}[/yellow]")
 
     analysis_time = time.time() - start_time
 
@@ -178,7 +178,7 @@ def _display_results(analysis, energy, confidence, detailed, analysis_time=0,
     """Display analysis results in enhanced format with all details"""
     
     # Main results table
-    table = Table(title="📊 Analysis Results", show_header=True, header_style="bold cyan")
+    table = Table(title="[CHART] Analysis Results", show_header=True, header_style="bold cyan")
     table.add_column("Metric", style="cyan", width=24)
     table.add_column("Value", style="green", width=44)
     
@@ -230,26 +230,26 @@ def _display_results(analysis, energy, confidence, detailed, analysis_time=0,
     feats = analysis['features']
     
     if feats.get('nested_loops'):
-        warnings.append("⚠️  Nested loops detected (O(n²) complexity)")
+        warnings.append("[WARN]  Nested loops detected (O(n²) complexity)")
         suggestions.append("Use vectorized operations (NumPy/Pandas) or hashing for lookups")
     
     if feats.get('has_recursion'):
-        warnings.append("⚠️  Recursion detected - may be exponential")
+        warnings.append("[WARN]  Recursion detected - may be exponential")
         suggestions.append("Consider memoization (@lru_cache) or iterative rewrite")
     
     if feats.get('string_concat_in_loop'):
         suggestions.append("Avoid string concatenation in loops; use ''.join()")
     
     if energy and energy > 100:
-        warnings.append("🚨 High energy consumption predicted!")
+        warnings.append("[ALERT] High energy consumption predicted!")
     
     if warnings:
-        console.print("\n[bold yellow]⚠️  Warnings:[/bold yellow]")
+        console.print("\n[bold yellow][WARN]  Warnings:[/bold yellow]")
         for w in warnings:
             console.print("  " + w)
     
     if suggestions:
-        console.print("\n[bold green]💡 Optimization Suggestions:[/bold green]")
+        console.print("\n[bold green][IDEA] Optimization Suggestions:[/bold green]")
         for i, s in enumerate(suggestions, 1):
             console.print(f"  {i}. {s}")
     
@@ -274,10 +274,10 @@ def benchmark(file, iterations):
         file_size_kb = round(file_path.stat().st_size / 1024, 2)
         total_lines, blank_lines, comment_lines = get_code_stats(code)
     except Exception as e:
-        console.print(f"[red]❌ Error reading file: {e}[/red]")
+        console.print(f"[red][NO] Error reading file: {e}[/red]")
         return
     
-    console.print(f"\n[bold cyan]⚡ Benchmarking:[/bold cyan] {file}")
+    console.print(f"\n[bold cyan][POWER] Benchmarking:[/bold cyan] {file}")
     console.print(f"[yellow]Running code {iterations} times to measure actual energy...[/yellow]\n")
     
     # Show progress
@@ -291,7 +291,7 @@ def benchmark(file, iterations):
         benchmark_time = time.time() - start_time
         
         # Display results table
-        table = Table(title="📊 Benchmark Results", show_header=True, header_style="bold cyan")
+        table = Table(title="[CHART] Benchmark Results", show_header=True, header_style="bold cyan")
         table.add_column("Metric", style="cyan", width=24)
         table.add_column("Value", style="green", width=44)
         
@@ -326,12 +326,12 @@ def benchmark(file, iterations):
         
         # Efficiency insights
         if result['cpu_percent'] < 5:
-            console.print("[green]✅ Low CPU usage - efficient code[/green]")
+            console.print("[green][YES] Low CPU usage - efficient code[/green]")
         elif result['cpu_percent'] > 50:
-            console.print("[yellow]⚠️  High CPU usage - potential optimization opportunity[/yellow]")
+            console.print("[yellow][WARN]  High CPU usage - potential optimization opportunity[/yellow]")
             
     except Exception as e:
-        console.print(f"[red]❌ Error during benchmark: {e}[/red]")
+        console.print(f"[red][NO] Error during benchmark: {e}[/red]")
 
 
 def estimate_memory_usage(num_loops: int, max_depth: int) -> float:
@@ -369,7 +369,7 @@ def compare(file1, file2):
     file1_path = Path(file1)
     file2_path = Path(file2)
     
-    console.print("\n[bold cyan]⚡ Comparing Implementations[/bold cyan]\n")
+    console.print("\n[bold cyan][POWER] Comparing Implementations[/bold cyan]\n")
     console.print(f"[yellow]Analyzing {file1_path.name} and {file2_path.name}...[/yellow]\n")
     
     # Show progress
@@ -382,9 +382,9 @@ def compare(file1, file2):
     
     try:
         predictor.load('models/energy_model.pkl')
-        console.print("[green]✔ ML model loaded[/green]\n")
+        console.print("[green][OK] ML model loaded[/green]\n")
     except Exception:
-        console.print("[red]❌ ML model not found. Run training first.[/red]")
+        console.print("[red][NO] ML model not found. Run training first.[/red]")
         return
     
     results = []
@@ -417,11 +417,11 @@ def compare(file1, file2):
                 'max_depth': max_depth,
             })
         except Exception as e:
-            console.print(f"[red]❌ Error analyzing {filepath.name}: {e}[/red]")
+            console.print(f"[red][NO] Error analyzing {filepath.name}: {e}[/red]")
             return
     
     # Display comparison table
-    table = Table(title="📊 Comparison Results", show_header=True, header_style="bold cyan")
+    table = Table(title="[CHART] Comparison Results", show_header=True, header_style="bold cyan")
     table.add_column("Metric", style="cyan", width=24)
     table.add_column(results[0]['file'], style="yellow", width=20)
     table.add_column(results[1]['file'], style="green", width=20)
@@ -470,15 +470,15 @@ def compare(file1, file2):
     
     energy_color = "green" if energy_improvement > 0 else "red"
     table.add_row("Energy Improvement", f"[{energy_color}]{energy_improvement:+.1f}%[/{energy_color}]", 
-                  f"{'✅ Better' if energy_improvement > 0 else '❌ Worse'}")
+                  f"{'[YES] Better' if energy_improvement > 0 else '[NO] Worse'}")
     
     mem_color = "green" if memory_improvement > 0 else "red"
     table.add_row("Memory Improvement", f"[{mem_color}]{memory_improvement:+.1f}%[/{mem_color}]", 
-                  f"{'✅ Better' if memory_improvement > 0 else '❌ Worse'}")
+                  f"{'[YES] Better' if memory_improvement > 0 else '[NO] Worse'}")
     
     time_color = "green" if time_improvement > 0 else "red"
     table.add_row("Speed Improvement", f"[{time_color}]{time_improvement:+.1f}%[/{time_color}]", 
-                  f"{'✅ Better' if time_improvement > 0 else '❌ Worse'}")
+                  f"{'[YES] Better' if time_improvement > 0 else '[NO] Worse'}")
     
     # ─── Environmental Impact ───
     table.add_row("", "", "")
@@ -501,43 +501,43 @@ def compare(file1, file2):
     console.print(table)
     
     # ─── Detailed Analysis ───
-    console.print("\n[bold cyan]📊 Detailed Analysis:[/bold cyan]")
+    console.print("\n[bold cyan][CHART] Detailed Analysis:[/bold cyan]")
     
     if results[0]['big_o'] != results[1]['big_o']:
-        console.print(f"[yellow]⚠️  Complexity differs: {results[0]['big_o']} vs {results[1]['big_o']}[/yellow]")
+        console.print(f"[yellow][WARN]  Complexity differs: {results[0]['big_o']} vs {results[1]['big_o']}[/yellow]")
     
     score_diff = results[0]['score'] - results[1]['score']
     if score_diff > 5:
-        console.print(f"[green]✅ {results[1]['file']} has {abs(score_diff):.0f} points better complexity score[/green]")
+        console.print(f"[green][YES] {results[1]['file']} has {abs(score_diff):.0f} points better complexity score[/green]")
     elif score_diff < -5:
-        console.print(f"[red]❌ {results[0]['file']} has worse complexity by {abs(score_diff):.0f} points[/red]")
+        console.print(f"[red][NO] {results[0]['file']} has worse complexity by {abs(score_diff):.0f} points[/red]")
     
     if energy_improvement > 10:
-        console.print(f"[green]✅ Significant energy improvement: {energy_improvement:.1f}%[/green]")
+        console.print(f"[green][YES] Significant energy improvement: {energy_improvement:.1f}%[/green]")
     elif energy_improvement > 0:
-        console.print(f"[green]✅ Moderate energy improvement: {energy_improvement:.1f}%[/green]")
+        console.print(f"[green][YES] Moderate energy improvement: {energy_improvement:.1f}%[/green]")
     elif energy_improvement < -10:
-        console.print(f"[red]❌ Significant energy regression: {abs(energy_improvement):.1f}%[/red]")
+        console.print(f"[red][NO] Significant energy regression: {abs(energy_improvement):.1f}%[/red]")
     elif energy_improvement < 0:
-        console.print(f"[yellow]⚠️  Slight energy regression: {abs(energy_improvement):.1f}%[/yellow]")
+        console.print(f"[yellow][WARN]  Slight energy regression: {abs(energy_improvement):.1f}%[/yellow]")
     
     # ─── Recommendation Panel ───
     overall_improvement = (energy_improvement + memory_improvement + time_improvement) / 3
     
     if overall_improvement > 30:
-        rec_title = "🏆 Highly Recommended"
+        rec_title = "[TROPHY] Highly Recommended"
         rec_color = "green"
         rec_text = f"Major improvements across all metrics! Use {results[1]['file']} (avg {overall_improvement:.1f}% better)"
     elif overall_improvement > 10:
-        rec_title = "✅ Recommended"
+        rec_title = "[YES] Recommended"
         rec_color = "cyan"
         rec_text = f"Good improvements overall! Consider using {results[1]['file']} (avg {overall_improvement:.1f}% better)"
     elif overall_improvement > 0:
-        rec_title = "⚠️  Marginal Improvement"
+        rec_title = "[WARN]  Marginal Improvement"
         rec_color = "yellow"
         rec_text = f"Slight gains ({overall_improvement:.1f}%). Choose based on code clarity"
     else:
-        rec_title = "❌ Not Recommended"
+        rec_title = "[NO] Not Recommended"
         rec_color = "red"
         rec_text = f"{results[1]['file']} performs worse overall ({overall_improvement:.1f}%)"
     
@@ -551,13 +551,13 @@ def compare(file1, file2):
 def refactor(file, output):
     """Refactor Python code to apply energy optimizations"""
     
-    console.print(f"\n[bold cyan]🔧 Refactoring:[/bold cyan] {file}\n")
+    console.print(f"\n[bold cyan][FIX] Refactoring:[/bold cyan] {file}\n")
     
     # Import refactorer
     try:
         from src.refactor.complete_rewriter import generate_corrected_code
     except ImportError:
-        console.print("[red]❌ Refactoring module not available[/red]")
+        console.print("[red][NO] Refactoring module not available[/red]")
         return
     
     # Read code
@@ -565,7 +565,7 @@ def refactor(file, output):
         with open(file, 'r') as f:
             code = f.read()
     except Exception as e:
-        console.print(f"[red]❌ Error reading file: {e}[/red]")
+        console.print(f"[red][NO] Error reading file: {e}[/red]")
         return
     
     # Analyze original
@@ -573,7 +573,7 @@ def refactor(file, output):
     try:
         original_analysis = analyzer.analyze(code)
     except Exception as e:
-        console.print(f"[red]❌ Error analyzing original code: {e}[/red]")
+        console.print(f"[red][NO] Error analyzing original code: {e}[/red]")
         return
     
     # Generate optimizations
@@ -587,7 +587,7 @@ def refactor(file, output):
             refactored_analysis = None
         
         # Display results
-        table = Table(title="🔧 Refactoring Results", show_header=True)
+        table = Table(title="[FIX] Refactoring Results", show_header=True)
         table.add_column("Metric", style="cyan", width=25)
         table.add_column("Original", style="red", width=25)
         table.add_column("Refactored", style="green", width=25)
@@ -602,7 +602,7 @@ def refactor(file, output):
         
         # Display applied optimizations
         if optimizations:
-            console.print("\n[bold green]✅ Applied Optimizations:[/bold green]")
+            console.print("\n[bold green][YES] Applied Optimizations:[/bold green]")
             for i, opt in enumerate(optimizations, 1):
                 console.print(f"  {i}. {opt}")
         else:
@@ -612,15 +612,15 @@ def refactor(file, output):
         if refactored_analysis:
             score_improvement = refactored_analysis['complexity_score'] - original_analysis['complexity_score']
             if score_improvement < 0:
-                console.print(f"\n[bold green]📊 Score improved by {abs(score_improvement):.0f} points![/bold green]")
+                console.print(f"\n[bold green][CHART] Score improved by {abs(score_improvement):.0f} points![/bold green]")
             elif score_improvement > 0:
-                console.print(f"\n[yellow]📊 Score change: +{score_improvement:.0f} points[/yellow]")
+                console.print(f"\n[yellow][CHART] Score change: +{score_improvement:.0f} points[/yellow]")
         
         # Output refactored code
         if output:
             with open(output, 'w') as f:
                 f.write(refactored_code)
-            console.print(f"\n[bold green]💾 Refactored code saved to: {output}[/bold green]")
+            console.print(f"\n[bold green][SAVE] Refactored code saved to: {output}[/bold green]")
         else:
             console.print(f"\n[bold cyan]Refactored Code Preview:[/bold cyan]")
             console.print(f"[yellow]Use --output / -o to save to file[/yellow]\n")
@@ -631,7 +631,7 @@ def refactor(file, output):
                 console.print(f"\n[dim]... ({len(refactored_code.split(chr(10))) - 50} more lines) ...[/dim]")
             
     except Exception as e:
-        console.print(f"[red]❌ Error during refactoring: {e}[/red]")
+        console.print(f"[red][NO] Error during refactoring: {e}[/red]")
         import traceback
         console.print(f"[dim]{traceback.format_exc()}[/dim]")
 
@@ -641,7 +641,7 @@ def refactor(file, output):
 def train(samples):
     """Generate training data and train ML model"""
     
-    console.print(f"\n[bold cyan]🤖 Training ML Model[/bold cyan]\n")
+    console.print(f"\n[bold cyan][AI] Training ML Model[/bold cyan]\n")
     console.print(f"Generating {samples} training samples...")
     console.print("[yellow]This will take several minutes depending on samples...[/yellow]\n")
     
@@ -649,28 +649,28 @@ def train(samples):
     from src.data.generate_data import TrainingDataGenerator
     
     # Generate data with progress
-    console.print("[bold]📊 Generating training data...[/bold]\n")
+    console.print("[bold][CHART] Generating training data...[/bold]\n")
     generator = TrainingDataGenerator()
     dataset = generator.generate_dataset(num_samples=samples)
     generator.save_dataset(dataset)
     
-    console.print(f"[green]✔ Dataset generated with {len(dataset)} samples[/green]\n")
+    console.print(f"[green][OK] Dataset generated with {len(dataset)} samples[/green]\n")
     
     # Train model
-    console.print("[bold]🤖 Training ML model...[/bold]\n")
+    console.print("[bold][AI] Training ML model...[/bold]\n")
     
     predictor = EnergyPredictor()
     X, y = predictor.prepare_data(dataset)
     
-    console.print(f"[cyan]📊 Training set size: {int(len(X) * 0.8)} samples[/cyan]")
-    console.print(f"[cyan]📊 Test set size: {int(len(X) * 0.2)} samples[/cyan]\n")
+    console.print(f"[cyan][CHART] Training set size: {int(len(X) * 0.8)} samples[/cyan]")
+    console.print(f"[cyan][CHART] Test set size: {int(len(X) * 0.2)} samples[/cyan]\n")
     
     predictor.train(X, y)
     predictor.save()
     
-    console.print("\n[bold green]✅ Training complete![/bold green]")
-    console.print(f"\n[green]✔ Model saved to: models/energy_model.pkl[/green]")
-    console.print(f"[green]✔ Training data saved to: data/training_data.pkl[/green]\n")
+    console.print("\n[bold green][YES] Training complete![/bold green]")
+    console.print(f"\n[green][OK] Model saved to: models/energy_model.pkl[/green]")
+    console.print(f"[green][OK] Training data saved to: data/training_data.pkl[/green]\n")
     console.print("[cyan]You can now use: energylens analyze <file> or energylens compare <f1> <f2>[/cyan]")
 
 
@@ -679,7 +679,7 @@ def info():
     """Show information about EnergyLens"""
     
     info_text = """
-[bold cyan]⚡ EnergyLens AI[/bold cyan]
+[bold cyan][POWER] EnergyLens AI[/bold cyan]
 
 Predict code energy consumption using machine learning.
 
@@ -691,7 +691,7 @@ Predict code energy consumption using machine learning.
 - ✓ Actual energy benchmarking
 - ✓ Automatic code refactoring with suggestions
 
-[bold]📊 Capabilities:[/bold]
+[bold][CHART] Capabilities:[/bold]
 - Detect nested loops, recursion, string operations
 - Estimate runtime for given complexity
 - Track file statistics (size, lines, comments)
@@ -731,7 +731,7 @@ Predict code energy consumption using machine learning.
   • Environmental impact (cost, CO2 emissions)
   • Specific optimization recommendations
 
-[bold]💡 Tips:[/bold]
+[bold][IDEA] Tips:[/bold]
   1. Always run 'energylens train' before using analyze/compare
   2. Use --detailed flag to see all extracted features
   3. Run benchmark on multiple iterations for accurate results
@@ -741,7 +741,7 @@ Predict code energy consumption using machine learning.
   GitHub: https://github.com/yourusername/energylens-ai
   Documentation: Check README.md in project root
 
-[bold green]🤖 EnergyLens - Making code energy-aware![/bold green]
+[bold green][AI] EnergyLens - Making code energy-aware![/bold green]
 """
     
     panel = Panel(info_text, title="EnergyLens AI", border_style="cyan", padding=(1, 2))
